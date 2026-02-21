@@ -1,0 +1,180 @@
+/* --- SCOPED VARIABLES --- */
+.vol-dashboard-container {
+    --vol-primary: #0f172a;
+    /* Slate 900 */
+    --vol-accent: #0d9488;
+    /* Teal 600 */
+    --vol-accent-hover: #0f766e;
+    /* Teal 700 */
+    --vol-bg: #f8fafc;
+    /* Slate 50 */
+    --vol-surface: #ffffff;
+    /* White */
+    --vol-text-main: #1e293b;
+    /* Slate 800 */
+    --vol-text-muted: #64748b;
+    /* Slate 500 */
+    --vol-border: #e2e8f0;
+    /* Slate 200 */
+
+    --vol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --vol-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --vol-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --vol-radius: 12px;
+    --vol-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--vol-bg);
+    min-height: 100vh;
+    padding: 40px 5%;
+    color: var(--vol-text-main);
+}
+
+/* Global Transition */
+.vol-dashboard-container * {
+    box-sizing: border-box;
+    transition: var(--vol-transition);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- HEADER SECTION --- */
+.vol-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--vol-border);
+    margin-bottom: 40px;
+    animation: slideDown 0.6s ease-out;
+}
+
+.vol-title-group h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--vol-primary);
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.vol-title-group h1::before {
+    content: '🤝';
+    /* Volunteer Icon */
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.vol-subtitle {
+    margin: 5px 0 0 0;
+    color: var(--vol-text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.vol-user-highlight {
+    color: var(--vol-accent);
+    font-weight: 700;
+}
+
+/* --- ACTION BUTTONS --- */
+.btn-logout {
+    background-color: var(--vol-surface);
+    color: var(--vol-text-muted);
+    border: 1px solid var(--vol-border);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--vol-shadow-sm);
+}
+
+.btn-logout:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+    border-color: #fecaca;
+    transform: translateY(-1px);
+    box-shadow: var(--vol-shadow-md);
+}
+
+/* --- DASHBOARD CONTENT AREA --- */
+.vol-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    animation: fadeInCard 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+/* Wrapper for the imported QuestionManager to ensure style isolation */
+.vol-module-wrapper {
+    background-color: var(--vol-surface);
+    border-radius: var(--vol-radius);
+    border: 1px solid var(--vol-border);
+    box-shadow: var(--vol-shadow-md);
+    padding: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.vol-module-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--vol-accent), #2dd4bf);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .vol-dashboard-container {
+        padding: 20px;
+    }
+
+    .vol-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .btn-logout {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .vol-module-wrapper {
+        padding: 20px;
+    }
+}

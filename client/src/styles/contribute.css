@@ -1,0 +1,327 @@
+/* --- SCOPED VARIABLES & RESET --- */
+.contribute-container {
+    --con-primary: #e63946;
+    --con-primary-dark: #b91c1c;
+    --con-dark: #1e293b;
+    --con-gray: #64748b;
+    --con-light: #f8fafc;
+    --con-white: #ffffff;
+    --con-blue: #2196f3;
+    --con-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --con-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --con-radius: 12px;
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--con-dark);
+    background-color: var(--con-light);
+    min-height: 100vh;
+    padding: 60px 5%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Global Transition */
+.contribute-container * {
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --- HEADER --- */
+.contribute-container h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, var(--con-dark) 0%, var(--con-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+/* --- TAB NAVIGATION --- */
+.contribute-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.contribute-tabs button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    background-color: var(--con-white);
+    color: var(--con-gray);
+    cursor: pointer;
+    box-shadow: var(--con-shadow);
+    font-weight: 500;
+}
+
+.contribute-tabs button:hover {
+    transform: translateY(-2px);
+    color: var(--con-primary);
+}
+
+/* Active Tab Styling (Logic handled via inline style in JSX, but CSS reinforces generic active look) */
+.contribute-tabs button[style*="bold"] {
+    background-color: var(--con-primary);
+    color: var(--con-white) !important;
+    /* Force override inline styles for color consistency */
+    box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    border-color: var(--con-primary);
+}
+
+/* --- CONTENT AREA --- */
+.contribute-content {
+    max-width: 1000px;
+    /* Wider for blood bank grid */
+    margin: 0 auto;
+    animation: fadeInScale 0.4s ease-out;
+}
+
+/* --- FORM SECTIONS (Money & Volunteer) --- */
+.form-section {
+    background: var(--con-white);
+    padding: 40px;
+    border-radius: var(--con-radius);
+    box-shadow: var(--con-shadow-lg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--con-dark);
+    text-align: center;
+}
+
+/* Form Inputs */
+.form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-section label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--con-gray);
+    margin-bottom: -10px;
+    display: block;
+}
+
+.form-section input,
+.form-section textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    outline: none;
+}
+
+.form-section input:focus,
+.form-section textarea:focus {
+    border-color: var(--con-primary);
+    background-color: var(--con-white);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1);
+}
+
+.form-section textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Submit Buttons */
+.form-section button[type="submit"],
+.form-section button[type="button"] {
+    margin-top: 10px;
+    padding: 16px;
+    background-color: var(--con-dark);
+    color: var(--con-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.form-section button[type="submit"]:hover,
+.form-section button[type="button"]:hover {
+    background-color: var(--con-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(230, 57, 70, 0.25);
+}
+
+.form-section button[disabled] {
+    background-color: #cbd5e1 !important;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* --- PAYMENT GATEWAY SPECIFIC --- */
+/* Targeting the specific containers in the JSX */
+.form-section div[style*="background-color: #f8f9fa"] {
+    background-color: #ffffff !important;
+    /* Override inline for cleaner look */
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+
+/* Payment Method Toggle Buttons */
+.form-section button[style*="flex: 1"] {
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-section button[style*="flex: 1"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- BLOOD BANK SEARCH SECTION --- */
+.info-section {
+    text-align: center;
+}
+
+.info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--con-dark);
+}
+
+.info-section p {
+    color: var(--con-gray);
+    margin-bottom: 30px;
+}
+
+/* Search Input Container */
+.info-section input[type="text"] {
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 20px !important;
+    border-radius: 50px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: var(--con-shadow);
+    font-size: 1.1rem !important;
+    transition: box-shadow 0.3s;
+}
+
+.info-section input[type="text"]:focus {
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--con-primary) !important;
+}
+
+/* Grid Layout for Cards */
+.bank-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px !important;
+    /* Override inline styles if needed */
+    padding: 10px;
+}
+
+/* Bank Cards */
+.bank-card {
+    background: var(--con-white);
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    text-align: left;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.bank-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    border-color: var(--con-primary) !important;
+}
+
+/* Top accent line on cards */
+.bank-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--con-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.bank-card:hover::before {
+    transform: scaleX(1);
+}
+
+.bank-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--con-dark);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Bank Card Details */
+.bank-card div[style*="font-size: 0.95rem"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--con-gray);
+    margin-bottom: 8px;
+}
+
+.bank-card strong {
+    color: var(--con-dark);
+    font-weight: 600;
+}
+
+/* Address Styling */
+.bank-card div[style*="border-top"] {
+    font-size: 0.85rem !important;
+    font-style: italic;
+    color: #94a3b8 !important;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .contribute-container h1 {
+        font-size: 2rem;
+    }
+
+    .contribute-tabs button {
+        width: 100%;
+        /* Stack buttons on mobile */
+        text-align: center;
+    }
+
+    .bank-list {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,456 @@
+/* --- SCOPED VARIABLES --- */
+.req-manager-container {
+    --rm-primary: #0f172a;
+    /* Slate 900 */
+    --rm-secondary: #3b82f6;
+    /* Blue 500 */
+    --rm-success: #10b981;
+    /* Emerald 500 */
+    --rm-warning: #f59e0b;
+    /* Amber 500 */
+    --rm-danger: #ef4444;
+    /* Red 500 */
+    --rm-bg: #f8fafc;
+    /* Slate 50 */
+    --rm-surface: #ffffff;
+    /* White */
+    --rm-text-main: #1e293b;
+    /* Slate 800 */
+    --rm-text-muted: #64748b;
+    /* Slate 500 */
+    --rm-border: #e2e8f0;
+    /* Slate 200 */
+
+    --rm-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --rm-radius: 12px;
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding: 30px 0;
+    color: var(--rm-text-main);
+}
+
+/* Global Reset */
+.req-manager-container * {
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+/* --- HEADER --- */
+.rm-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--rm-border);
+    padding-bottom: 15px;
+}
+
+.rm-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--rm-primary);
+}
+
+.rm-pulse {
+    width: 12px;
+    height: 12px;
+    background-color: var(--rm-danger);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+/* --- REQUEST CARD --- */
+.rm-card {
+    background: var(--rm-surface);
+    border: 1px solid var(--rm-border);
+    border-radius: var(--rm-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--rm-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.rm-card.locked {
+    background-color: #f1f5f9;
+    /* Muted background for locked items */
+    border-color: #cbd5e1;
+    opacity: 0.85;
+}
+
+.rm-card.active {
+    border-left: 5px solid var(--rm-warning);
+}
+
+.rm-card.locked {
+    border-left: 5px solid var(--rm-success);
+}
+
+/* Card Header */
+.rm-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rm-border);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.rm-title h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--rm-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rm-blood-badge {
+    background-color: #fee2e2;
+    color: var(--rm-danger);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.rm-status-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.status-pending {
+    background-color: #fffbeb;
+    color: var(--rm-warning);
+    border: 1px solid #fcd34d;
+}
+
+.status-arranging {
+    background-color: #eff6ff;
+    color: var(--rm-secondary);
+    border: 1px solid #bfdbfe;
+}
+
+.status-completed {
+    background-color: #dcfce7;
+    color: var(--rm-success);
+    border: 1px solid #86efac;
+}
+
+/* --- CONFIRMED ALLOCATIONS AREA --- */
+.rm-confirmed-box {
+    background-color: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.rm-confirmed-title {
+    display: block;
+    font-weight: 700;
+    color: #065f46;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.rm-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rm-list li {
+    font-size: 0.95rem;
+    color: #047857;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rm-list li::before {
+    content: '✓';
+    font-weight: bold;
+}
+
+/* --- LOCKED STATE MESSAGE --- */
+.rm-locked-msg {
+    text-align: center;
+    padding: 15px;
+    background-color: #dcfce7;
+    color: #166534;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 1px dashed #166534;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* --- PENDING CONFIRMATION BOX --- */
+.rm-pending-box {
+    background-color: #fff7ed;
+    border: 1px solid #fdba74;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(249, 115, 22, 0.1);
+}
+
+.rm-pending-header {
+    margin: 0 0 10px 0;
+    color: #c2410c;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rm-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--rm-surface);
+    border: 1px solid #fed7aa;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+/* Action Buttons (Small) */
+.btn-sm {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.btn-confirm {
+    background-color: var(--rm-success);
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #059669;
+}
+
+.btn-cancel {
+    background-color: var(--rm-surface);
+    border: 1px solid var(--rm-danger);
+    color: var(--rm-danger);
+}
+
+.btn-cancel:hover {
+    background-color: #fef2f2;
+}
+
+/* --- VOLUNTEER LIST --- */
+.rm-vol-section {
+    margin-bottom: 20px;
+}
+
+.rm-section-title {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--rm-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.rm-vol-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid var(--rm-border);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.rm-vol-info span {
+    display: block;
+}
+
+.rm-vol-name {
+    font-weight: 600;
+    color: var(--rm-text-main);
+}
+
+.rm-vol-meta {
+    font-size: 0.85rem;
+    color: var(--rm-text-muted);
+}
+
+/* Volunteer Action Buttons */
+.btn-select {
+    background-color: var(--rm-secondary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.btn-select:hover {
+    background-color: #2563eb;
+}
+
+.btn-select:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.badge-wait {
+    background-color: #fee2e2;
+    color: var(--rm-danger);
+    border: 1px solid #fecaca;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* --- STOCK FINDER --- */
+.rm-stock-section {
+    margin-top: 20px;
+    border-top: 1px dashed var(--rm-border);
+    padding-top: 15px;
+}
+
+.btn-find-stock {
+    width: 100%;
+    background-color: var(--rm-surface);
+    border: 1px solid var(--rm-secondary);
+    color: var(--rm-secondary);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-find-stock:hover {
+    background-color: #eff6ff;
+}
+
+/* --- STOCK TABLE --- */
+.rm-stock-results {
+    margin-top: 20px;
+    background-color: #f0f9ff;
+    /* Light blue tint */
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #bae6fd;
+}
+
+.rm-stock-results h5 {
+    margin: 0 0 15px 0;
+    color: #0369a1;
+    font-size: 1rem;
+}
+
+.rm-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rm-table th {
+    text-align: left;
+    color: #0369a1;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #bae6fd;
+}
+
+.rm-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #e0f2fe;
+    color: var(--rm-text-main);
+    font-size: 0.95rem;
+}
+
+.rm-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-in-list {
+    color: var(--rm-success);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.status-pending-text {
+    color: var(--rm-warning);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Unit Availability Colors */
+.units-low {
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+.units-good {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.btn-stock-select {
+    background-color: var(--rm-success);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.btn-stock-select:hover {
+    background-color: #059669;
+}
+
+.btn-stock-select:disabled {
+    background-color: #cbd5e1;
+    cursor: not-allowed;
+}

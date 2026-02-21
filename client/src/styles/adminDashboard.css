@@ -1,0 +1,428 @@
+/* --- SCOPED VARIABLES --- */
+.admin-container {
+    --adm-primary: #0f172a;
+    /* Slate 900 (Deep Navy) */
+    --adm-secondary: #3b82f6;
+    /* Blue 500 (Primary Action) */
+    --adm-accent: #6366f1;
+    /* Indigo 500 (Focus/Highlight) */
+    --adm-success: #10b981;
+    /* Emerald 500 */
+    --adm-danger: #ef4444;
+    /* Red 500 */
+    --adm-warning: #f59e0b;
+    /* Amber 500 */
+    --adm-bg: #f8fafc;
+    /* Slate 50 (App Background) */
+    --adm-surface: #ffffff;
+    /* White (Card Background) */
+    --adm-text-main: #1e293b;
+    /* Slate 800 */
+    --adm-text-muted: #64748b;
+    /* Slate 500 */
+    --adm-border: #e2e8f0;
+    /* Slate 200 */
+
+    /* Elevation Shadows */
+    --adm-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --adm-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --adm-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --adm-radius: 12px;
+    --adm-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--adm-bg);
+    min-height: 100vh;
+    padding: 40px 5%;
+    color: var(--adm-text-main);
+    box-sizing: border-box;
+}
+
+/* Global Reset & Transition */
+.admin-container * {
+    box-sizing: border-box;
+    transition: var(--adm-transition);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- HEADER --- */
+.admin-container h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: var(--adm-primary);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    letter-spacing: -0.025em;
+    animation: slideInRight 0.5s ease-out;
+}
+
+.admin-container h1::before {
+    content: '⚡';
+    /* Changed icon for a more 'tech' feel */
+    font-size: 2.2rem;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* --- NAVIGATION TABS --- */
+.admin-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding: 5px;
+    background: var(--adm-surface);
+    border-radius: 16px;
+    box-shadow: var(--adm-shadow-sm);
+    width: fit-content;
+    border: 1px solid var(--adm-border);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.admin-tabs button {
+    padding: 10px 24px;
+    border: none;
+    background-color: transparent;
+    color: var(--adm-text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-tabs button:hover {
+    color: var(--adm-primary);
+    background-color: #f1f5f9;
+}
+
+/* Active Tab Styling */
+.admin-tabs button[style*="bold"] {
+    background-color: var(--adm-primary);
+    color: var(--adm-surface) !important;
+    box-shadow: var(--adm-shadow-md);
+}
+
+.admin-tabs button[style*="bold"]:hover {
+    background-color: #334155;
+    /* Slightly lighter slate for hover on active */
+}
+
+/* --- STAFF FORM CARD --- */
+.staff-form-card {
+    background-color: var(--adm-surface);
+    border-radius: var(--adm-radius) !important;
+    border: 1px solid var(--adm-border) !important;
+    box-shadow: var(--adm-shadow-md);
+    padding: 40px !important;
+    animation: fadeIn 0.5s ease-out;
+    margin-bottom: 40px;
+}
+
+.staff-form-card:hover {
+    box-shadow: var(--adm-shadow-lg);
+    transform: translateY(-2px);
+}
+
+.staff-form-card h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--adm-primary);
+    border-bottom: 1px solid var(--adm-border);
+    padding-bottom: 15px;
+}
+
+.staff-form-card form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px !important;
+}
+
+/* Inputs & Selects */
+.staff-form-card input,
+.staff-form-card select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--adm-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    color: var(--adm-text-main);
+    outline: none;
+}
+
+.staff-form-card input::placeholder {
+    color: #94a3b8;
+}
+
+.staff-form-card input:focus,
+.staff-form-card select:focus {
+    border-color: var(--adm-secondary);
+    background-color: var(--adm-surface);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    /* Soft focus ring */
+}
+
+.staff-form-card input:hover,
+.staff-form-card select:hover {
+    border-color: #cbd5e1;
+}
+
+/* Buttons inside Form */
+.staff-form-card button[type="submit"] {
+    background-color: var(--adm-secondary) !important;
+    color: white;
+    padding: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    grid-column: span 2;
+    box-shadow: var(--adm-shadow-sm);
+}
+
+.staff-form-card button[type="submit"]:hover {
+    background-color: #2563eb !important;
+    box-shadow: var(--adm-shadow-md);
+    transform: translateY(-1px);
+}
+
+.staff-form-card button[type="button"] {
+    /* Cancel Button */
+    background-color: transparent;
+    border: 1px solid var(--adm-danger);
+    color: var(--adm-danger);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    grid-column: span 2;
+    margin-top: 10px;
+}
+
+.staff-form-card button[type="button"]:hover {
+    background-color: #fef2f2;
+}
+
+/* --- DATA TABLE --- */
+.staff-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--adm-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.staff-section table {
+    width: 100%;
+    background-color: var(--adm-surface);
+    border-radius: var(--adm-radius);
+    overflow: hidden;
+    box-shadow: var(--adm-shadow-md);
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--adm-border);
+    animation: fadeIn 0.7s ease-out;
+}
+
+.staff-section thead {
+    background-color: #f1f5f9;
+}
+
+.staff-section thead th {
+    padding: 18px 24px !important;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--adm-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.staff-section tbody tr {
+    background-color: var(--adm-surface);
+    transition: background-color 0.15s ease;
+}
+
+.staff-section tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.staff-section tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.staff-section td {
+    padding: 18px 24px !important;
+    font-size: 0.95rem;
+    color: var(--adm-text-main);
+    vertical-align: middle;
+}
+
+/* User Info Styling in Table */
+.staff-section td strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--adm-primary);
+    margin-bottom: 4px;
+}
+
+.staff-phone {
+    font-size: 0.85rem;
+    color: var(--adm-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Role Badges - Professional Pills */
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    /* Pill shape */
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.role-admin {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.role-hospital {
+    background-color: #e0f2fe;
+    color: #075985;
+    border: 1px solid #bae6fd;
+}
+
+.role-collector {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+    border: 1px solid #e9d5ff;
+}
+
+.role-volunteer {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.role-donor {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+/* Table Action Buttons */
+.btn-edit-user {
+    background-color: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    color: var(--adm-text-muted);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 8px !important;
+    box-shadow: var(--adm-shadow-sm);
+}
+
+.btn-edit-user:hover {
+    border-color: var(--adm-secondary);
+    color: var(--adm-secondary);
+    background-color: #eff6ff;
+    transform: translateY(-1px);
+}
+
+.btn-delete-user {
+    background-color: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    color: var(--adm-danger) !important;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--adm-shadow-sm);
+}
+
+.btn-delete-user:hover {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+    color: #b91c1c !important;
+    transform: translateY(-1px);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 900px) {
+    .admin-container {
+        padding: 20px 3%;
+    }
+
+    .staff-form-card {
+        padding: 25px !important;
+    }
+
+    .staff-form-card form {
+        grid-template-columns: 1fr;
+        /* Stack inputs */
+        gap: 16px !important;
+    }
+
+    .staff-form-card button[type="submit"],
+    .staff-form-card button[type="button"] {
+        grid-column: span 1;
+    }
+
+    .staff-section {
+        overflow-x: auto;
+        /* Horizontal scroll for table */
+        border-radius: var(--adm-radius);
+        box-shadow: var(--adm-shadow-md);
+    }
+
+    .staff-section table {
+        min-width: 600px;
+        /* Force min width to keep table readable */
+        border: none;
+        box-shadow: none;
+    }
+}

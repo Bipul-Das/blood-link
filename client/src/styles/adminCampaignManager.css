@@ -1,0 +1,303 @@
+/* --- SCOPED VARIABLES --- */
+.acm-container {
+    --acm-primary: #4f46e5;
+    /* Indigo 600 */
+    --acm-primary-hover: #4338ca;
+    /* Indigo 700 */
+    --acm-secondary: #0f172a;
+    /* Slate 900 */
+    --acm-bg: #f1f5f9;
+    /* Slate 100 */
+    --acm-surface: #ffffff;
+    /* White */
+    --acm-text-main: #1e293b;
+    /* Slate 800 */
+    --acm-text-muted: #64748b;
+    /* Slate 500 */
+    --acm-border: #e2e8f0;
+    /* Slate 200 */
+
+    --acm-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --acm-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --acm-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    --acm-radius: 16px;
+    --acm-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--acm-bg);
+    padding: 40px;
+    border-radius: var(--acm-radius);
+    color: var(--acm-text-main);
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Global Reset */
+.acm-container * {
+    box-sizing: border-box;
+    transition: var(--acm-transition);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- LAYOUT GRID --- */
+.acm-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- HEADER --- */
+.acm-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--acm-border);
+}
+
+.acm-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--acm-secondary);
+    letter-spacing: -0.025em;
+}
+
+.acm-icon {
+    background: linear-gradient(135deg, var(--acm-primary), #818cf8);
+    color: white;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    box-shadow: var(--acm-shadow-md);
+}
+
+/* --- FORM CARD (Sidebar) --- */
+.acm-form-card {
+    background-color: var(--acm-surface);
+    padding: 30px;
+    border-radius: var(--acm-radius);
+    box-shadow: var(--acm-shadow-lg);
+    border: 1px solid var(--acm-border);
+    animation: slideInLeft 0.5s ease-out;
+    position: sticky;
+    top: 20px;
+}
+
+.acm-form-title {
+    margin: 0 0 20px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--acm-text-main);
+    border-left: 4px solid var(--acm-primary);
+    padding-left: 10px;
+}
+
+.acm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Inputs */
+.acm-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.acm-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--acm-text-muted);
+}
+
+.acm-input,
+.acm-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--acm-border);
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--acm-text-main);
+}
+
+.acm-input:focus,
+.acm-textarea:focus {
+    outline: none;
+    background-color: var(--acm-surface);
+    border-color: var(--acm-primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.acm-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button */
+.acm-btn-submit {
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--acm-primary), #4338ca);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: var(--acm-shadow-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.acm-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+}
+
+.acm-btn-submit:active {
+    transform: translateY(0);
+}
+
+/* --- CAMPAIGN LIST (Main Content) --- */
+.acm-list-section {
+    background-color: var(--acm-surface);
+    border-radius: var(--acm-radius);
+    box-shadow: var(--acm-shadow-md);
+    border: 1px solid var(--acm-border);
+    overflow: hidden;
+}
+
+.acm-list-header {
+    padding: 20px 30px;
+    background-color: var(--acm-surface);
+    border-bottom: 1px solid var(--acm-border);
+}
+
+.acm-list-header h4 {
+    margin: 0;
+    color: var(--acm-text-muted);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.acm-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.acm-table th {
+    text-align: left;
+    padding: 16px 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--acm-text-muted);
+    text-transform: uppercase;
+    background-color: #f8fafc;
+    border-bottom: 1px solid var(--acm-border);
+}
+
+.acm-table td {
+    padding: 20px 30px;
+    font-size: 0.95rem;
+    color: var(--acm-text-main);
+    border-bottom: 1px solid var(--acm-border);
+    vertical-align: middle;
+}
+
+.acm-table tr:last-child td {
+    border-bottom: none;
+}
+
+.acm-table tr:hover {
+    background-color: #fdfdfd;
+}
+
+/* Table Content Styling */
+.acm-campaign-title {
+    font-weight: 700;
+    color: var(--acm-secondary);
+    font-size: 1rem;
+}
+
+.acm-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--acm-text-muted);
+    font-size: 0.9rem;
+    background-color: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.acm-badge-participants {
+    background-color: #eff6ff;
+    color: #2563eb;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: 1px solid #dbeafe;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 968px) {
+    .acm-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .acm-form-card {
+        position: static;
+        margin-bottom: 20px;
+    }
+
+    .acm-container {
+        padding: 20px;
+    }
+
+    .acm-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

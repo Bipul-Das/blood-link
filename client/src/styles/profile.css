@@ -1,0 +1,295 @@
+/* --- SCOPED VARIABLES & RESET --- */
+.profile-container {
+    --prof-primary: #e63946;
+    --prof-primary-hover: #d62828;
+    --prof-dark: #0f172a;
+    --prof-gray: #64748b;
+    --prof-light: #f1f5f9;
+    --prof-white: #ffffff;
+    --prof-border: #e2e8f0;
+    --prof-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --prof-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --prof-radius: 16px;
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* Global Box Sizing */
+.profile-container * {
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- MAIN CARD --- */
+.profile-card {
+    background: var(--prof-white);
+    width: 100%;
+    max-width: 850px;
+    border-radius: var(--prof-radius);
+    box-shadow: var(--prof-shadow-xl);
+    overflow: hidden;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* --- HEADER SECTION --- */
+.profile-header {
+    padding: 30px 40px;
+    background: linear-gradient(to right, #ffffff, #f8fafc);
+    border-bottom: 1px solid var(--prof-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--prof-dark);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-header h1::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 24px;
+    background-color: var(--prof-primary);
+    border-radius: 4px;
+}
+
+/* Edit Toggle Button */
+.btn-toggle {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: 1px solid var(--prof-border);
+    background: var(--prof-white);
+    color: var(--prof-gray);
+    box-shadow: var(--prof-shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-toggle:hover {
+    background: var(--prof-light);
+    color: var(--prof-dark);
+    transform: translateY(-2px);
+}
+
+.btn-toggle.active {
+    background: var(--prof-dark);
+    color: var(--prof-white);
+    border-color: var(--prof-dark);
+}
+
+/* --- FORM CONTENT --- */
+.profile-content {
+    padding: 40px;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--prof-primary);
+    font-weight: 700;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--prof-border);
+}
+
+/* Grid Layouts */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.form-full-width {
+    grid-column: span 2;
+}
+
+/* Input Groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--prof-gray);
+}
+
+/* INPUT STYLING (The Magic Switch) */
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    color: var(--prof-dark);
+
+    /* Default: Read-Only Look */
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding-left: 0;
+    font-weight: 500;
+}
+
+/* Edit Mode Styling */
+.form-input:not(:disabled) {
+    background-color: var(--prof-white);
+    border: 1px solid var(--prof-border);
+    padding-left: 15px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-weight: 400;
+}
+
+.form-input:not(:disabled):focus {
+    border-color: var(--prof-primary);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1);
+}
+
+/* Special styling for disabled fields in Edit Mode (like Email) */
+.form-input.locked {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #94a3b8;
+    cursor: not-allowed;
+    padding-left: 15px;
+    /* Keep alignment */
+    border: 1px solid transparent;
+}
+
+/* --- PASSWORD SECTION --- */
+.password-section {
+    background-color: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 10px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.password-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    color: #be123c;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.password-desc {
+    font-size: 0.9rem;
+    color: #881337;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.password-section .form-input {
+    background-color: var(--prof-white) !important;
+    border-color: #fda4af !important;
+}
+
+.password-section .form-input:focus {
+    border-color: #be123c !important;
+    box-shadow: 0 0 0 4px rgba(190, 18, 60, 0.1) !important;
+}
+
+/* --- ACTION BUTTONS --- */
+.btn-save {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--prof-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
+}
+
+.btn-save:hover {
+    background-color: var(--prof-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .form-full-width {
+        grid-column: span 1;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .btn-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+}

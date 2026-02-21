@@ -1,0 +1,553 @@
+/* --- SCOPED VARIABLES & RESET --- */
+.services-container {
+    --svc-primary: #e63946;
+    --svc-primary-dark: #b91c1c;
+    --svc-dark: #0f172a;
+    /* Slate 900 */
+    --svc-light: #f8fafc;
+    /* Slate 50 */
+    --svc-gray: #334155;
+    /* Slate 700 */
+    --svc-muted: #64748b;
+    /* Slate 500 */
+    --svc-white: #ffffff;
+    --svc-accent-blue: #3b82f6;
+    --svc-gradient-red: linear-gradient(135deg, #e63946 0%, #f43f5e 100%);
+    --svc-gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --svc-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --svc-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--svc-gray);
+    background-color: var(--svc-light);
+    line-height: 1.6;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseSoft {
+    0% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.2);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(230, 57, 70, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+    }
+}
+
+@keyframes flashGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+        background-color: transparent;
+    }
+
+    50% {
+        box-shadow: 0 0 20px 5px rgba(230, 57, 70, 0.5);
+        background-color: rgba(230, 57, 70, 0.1);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+        background-color: transparent;
+    }
+}
+
+/* --- 1. HERO SECTION --- */
+.services-container .services-hero {
+    padding: 100px 5%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f1f5f9 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Abstract Background Shapes */
+.services-container .services-hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(230, 57, 70, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.services-container .services-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    animation: fadeUp 0.8s ease-out;
+}
+
+.services-container .overline {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--svc-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.services-container .services-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--svc-dark);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.services-container .services-hero p {
+    font-size: 1.25rem;
+    color: var(--svc-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- 2. SOLUTIONS GRID (Bento Style) --- */
+.services-container .solutions-section {
+    padding: 80px 8%;
+    background-color: var(--svc-white);
+}
+
+.services-container .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-container .section-header h2 {
+    font-size: 2.5rem;
+    color: var(--svc-dark);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.services-container .solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.services-container .solution-card {
+    background: var(--svc-white);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.services-container .solution-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--svc-shadow-xl);
+    border-color: var(--svc-primary);
+}
+
+/* Top colored line on cards */
+.services-container .solution-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--svc-gradient-red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.services-container .solution-card:hover::after {
+    transform: scaleX(1);
+}
+
+.services-container .card-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #fff1f2;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.services-container .solution-card h3 {
+    font-size: 1.5rem;
+    color: var(--svc-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.services-container .card-desc {
+    font-size: 1rem;
+    color: var(--svc-muted);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.services-container .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-container .feature-list li {
+    font-size: 0.95rem;
+    color: var(--svc-gray);
+    margin-bottom: 10px;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- 3. SEGMENTS SECTION (Alternating Rows) --- */
+.services-container .segments-section {
+    padding: 100px 8%;
+    background-color: var(--svc-light);
+}
+
+.services-container .segment-row {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 100px;
+}
+
+.services-container .segment-row:last-child {
+    margin-bottom: 0;
+}
+
+.services-container .segment-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.services-container .segment-content {
+    flex: 1;
+}
+
+.services-container .segment-content h3 {
+    font-size: 2rem;
+    color: var(--svc-dark);
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.services-container .segment-content p {
+    font-size: 1.1rem;
+    color: var(--svc-muted);
+    margin-bottom: 30px;
+}
+
+.services-container .text-link {
+    color: var(--svc-primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    transition: padding 0.3s;
+    cursor: pointer;
+}
+
+.services-container .text-link:hover {
+    padding-left: 5px;
+    color: var(--svc-primary-dark);
+}
+
+/* Premium Image Placeholder Style */
+.services-container .segment-image-placeholder {
+    flex: 1;
+    height:fit-content;
+    border-radius: 20px;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1367dc;
+    font-weight: 600;
+    font-size: 1.2rem;
+    box-shadow: var(--svc-shadow-xl);
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    padding: 0;
+}
+
+.services-container .segment-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.services-container .segment-image-placeholder:hover img {
+    transform: scale(1.05);
+}
+
+/* --- 4. TECH HIGHLIGHT (Dark Mode) --- */
+.services-container .tech-highlight {
+    background: var(--svc-gradient-dark);
+    padding: 100px 8%;
+    color: var(--svc-white);
+    text-align: center;
+}
+
+.services-container .tech-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.services-container .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.services-container .tech-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s;
+}
+
+.services-container .tech-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.services-container .tech-item h4 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: var(--svc-white);
+}
+
+.services-container .tech-item p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+/* --- 5. CTA SECTION --- */
+.services-container .services-cta {
+    padding: 100px 5%;
+    text-align: center;
+    background-color: var(--svc-white);
+    position: relative;
+}
+
+.services-container .services-cta h2 {
+    font-size: 2.5rem;
+    color: var(--svc-dark);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-container .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.services-container .btn-primary,
+.services-container .btn-outline,
+.services-container .btn-secondary {
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.services-container .btn-primary {
+    background: var(--svc-primary);
+    color: var(--svc-white);
+    box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+}
+
+.services-container .btn-primary:hover {
+    background: var(--svc-primary-dark);
+    transform: translateY(-2px);
+}
+
+.services-container .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--svc-dark);
+    color: var(--svc-dark);
+}
+
+.services-container .btn-secondary:hover {
+    background: var(--svc-dark);
+    color: var(--svc-white);
+    transform: translateY(-2px);
+}
+
+/* --- 6. FOOTER STYLES --- */
+.services-container .services-footer {
+    background-color: var(--svc-dark);
+    color: #94a3b8;
+    padding: 80px 8% 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.services-container .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.services-container .footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.services-container .footer-col h3 {
+    color: var(--svc-white);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.services-container .footer-col h4 {
+    color: var(--svc-white);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.services-container .footer-col a {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.services-container .footer-col a:hover {
+    color: var(--svc-primary);
+}
+
+/* Contact Specifics */
+.services-container .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.services-container .contact-item a {
+    margin-bottom: 0;
+}
+
+/* The Glow Effect for Contact Section */
+.services-container .glow-active {
+    animation: flashGlow 2s ease-in-out;
+    border-radius: 8px;
+    padding: 10px;
+    /* Internal padding to prevent overlap with border */
+    margin: -10px;
+    /* Negative margin to keep layout shift minimal */
+}
+
+/* Social Icons */
+.services-container .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.services-container .social-icons a {
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--svc-white);
+    transition: all 0.3s;
+}
+
+.services-container .social-icons a:hover {
+    background: var(--svc-primary);
+    transform: translateY(-3px);
+}
+
+.services-container .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+
+    .services-container .segment-row,
+    .services-container .segment-row.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .services-container .segment-image-placeholder {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+    .services-container .services-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .services-container .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .services-container .footer-content {
+        flex-direction: column;
+    }
+}

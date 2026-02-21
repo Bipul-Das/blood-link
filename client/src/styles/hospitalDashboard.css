@@ -1,0 +1,282 @@
+/* --- SCOPED VARIABLES --- */
+.hospital-container {
+    --hos-primary: #be123c;
+    /* Rose 700 (Medical Red) */
+    --hos-primary-hover: #9f1239;
+    /* Rose 800 */
+    --hos-secondary: #334155;
+    /* Slate 700 */
+    --hos-bg: #f8fafc;
+    /* Slate 50 */
+    --hos-surface: #ffffff;
+    /* White */
+    --hos-text-main: #0f172a;
+    /* Slate 900 */
+    --hos-text-muted: #64748b;
+    /* Slate 500 */
+    --hos-border: #e2e8f0;
+    /* Slate 200 */
+
+    --hos-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --hos-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --hos-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --hos-radius: 12px;
+    --hos-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--hos-bg);
+    min-height: 100vh;
+    padding: 40px 5%;
+    color: var(--hos-text-main);
+}
+
+/* Global Reset */
+.hospital-container * {
+    box-sizing: border-box;
+    transition: var(--hos-transition);
+}
+
+/* --- HEADER --- */
+.hospital-container h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: var(--hos-secondary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 5px solid var(--hos-primary);
+    padding-left: 15px;
+}
+
+/* --- DASHBOARD LAYOUT --- */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- FORM CARD (Sidebar) --- */
+.form-card {
+    background-color: var(--hos-surface);
+    border-radius: var(--hos-radius);
+    padding: 30px !important;
+    box-shadow: var(--hos-shadow-lg);
+    border: 1px solid var(--hos-border) !important;
+    position: sticky;
+    top: 20px;
+}
+
+.form-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--hos-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--hos-border);
+    padding-bottom: 10px;
+}
+
+.form-card form label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--hos-text-muted);
+    margin-bottom: 4px;
+}
+
+.form-card input,
+.form-card select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--hos-border);
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    color: var(--hos-text-main);
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    outline: none;
+    border-color: var(--hos-primary);
+    background-color: var(--hos-surface);
+    box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.1);
+}
+
+.form-card button[type="submit"] {
+    background-color: var(--hos-primary) !important;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: var(--hos-shadow-sm);
+}
+
+.form-card button[type="submit"]:hover {
+    background-color: var(--hos-primary-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--hos-shadow-md);
+}
+
+/* --- TABLE CARD (Main Content) --- */
+.table-card {
+    background-color: var(--hos-surface);
+    border-radius: var(--hos-radius);
+    box-shadow: var(--hos-shadow-md);
+    border: 1px solid var(--hos-border);
+    overflow: hidden;
+}
+
+/* Tabs */
+.hos-tabs {
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--hos-border);
+    background-color: #f8fafc;
+}
+
+.hos-tab-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--hos-text-muted);
+    cursor: pointer;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.hos-tab-btn:hover {
+    color: var(--hos-primary);
+}
+
+.hos-tab-btn.active {
+    color: var(--hos-primary);
+}
+
+.hos-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    /* Align with border-bottom of container */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--hos-primary);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Data Table */
+.hos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.hos-table thead {
+    background-color: var(--hos-surface);
+}
+
+.hos-table th {
+    text-align: left;
+    padding: 15px 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--hos-text-muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--hos-border);
+}
+
+.hos-table td {
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--hos-border);
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+.hos-table tr:hover {
+    background-color: #fef2f2;
+    /* Subtle red tint on hover */
+}
+
+/* Status Styles */
+.hos-expired-row {
+    background-color: #fff1f2 !important;
+    /* Stronger tint for expired */
+}
+
+.hos-badge-avail {
+    background-color: #dcfce7;
+    color: #166534;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hos-badge-expired {
+    color: #9f1239;
+    font-weight: 800;
+    font-size: 0.8rem;
+    margin-left: 8px;
+}
+
+/* Action Buttons */
+.btn-action-use {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-action-use:hover {
+    background-color: #0284c7;
+}
+
+.btn-action-discard {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-action-discard:hover {
+    background-color: #dc2626;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        position: static;
+        margin-bottom: 30px;
+    }
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    .hos-table {
+        min-width: 600px;
+    }
+}
